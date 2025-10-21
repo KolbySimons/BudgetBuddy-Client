@@ -1,0 +1,173 @@
+/* Create Budget Page Styles */
+
+.create-budget-page {
+  padding: 30px;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.create-budget-page h1 {
+  margin-bottom: 30px;
+  color: var(--gray-800);
+}
+
+.budget-form-card {
+  background: white;
+  border: 2px solid var(--gray-200);
+  border-radius: 10px;
+  padding: 30px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.budget-form-section {
+  margin-bottom: 30px;
+}
+
+.budget-form-section h3 {
+  margin-bottom: 20px;
+  color: var(--gray-800);
+  font-size: 20px;
+}
+
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.budget-form-divider {
+  border: none;
+  border-top: 2px solid var(--gray-200);
+  margin: 40px 0;
+}
+
+/* Category Allocation */
+.allocation-form {
+  background: var(--gray-50);
+  border: 2px solid var(--gray-200);
+  border-radius: 8px;
+  padding: 20px;
+  margin-bottom: 20px;
+}
+
+.allocation-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  gap: 15px;
+  align-items: flex-end;
+}
+
+.allocations-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 20px 0;
+  background: white;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.allocations-table th,
+.allocations-table td {
+  border: 1px solid var(--gray-200);
+  padding: 14px;
+  text-align: left;
+}
+
+.allocations-table th {
+  background: var(--gray-100);
+  font-weight: 700;
+  color: var(--gray-800);
+}
+
+.allocations-table tbody tr:hover {
+  background: var(--gray-50);
+}
+
+.category-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-icon {
+  font-size: 24px;
+}
+
+.allocation-summary {
+  background: #ebf4ff;
+  border-left: 4px solid #4299e1;
+  padding: 15px 20px;
+  border-radius: 5px;
+  margin: 20px 0;
+}
+
+.allocation-summary-row {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 5px;
+}
+
+.allocation-summary-row:last-child {
+  margin-bottom: 0;
+}
+
+.allocation-summary-row strong {
+  color: var(--gray-800);
+}
+
+.allocation-summary-row span {
+  font-weight: 600;
+}
+
+.allocation-summary-row.unallocated span {
+  color: var(--success);
+}
+
+.allocation-summary-row.over-allocated span {
+  color: var(--danger);
+}
+
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 40px;
+}
+
+.empty-allocations {
+  text-align: center;
+  padding: 40px;
+  color: var(--gray-500);
+  font-style: italic;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .create-budget-page {
+    padding: 20px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .allocation-row {
+    grid-template-columns: 1fr;
+  }
+
+  .allocations-table {
+    font-size: 14px;
+  }
+
+  .allocations-table th,
+  .allocations-table td {
+    padding: 10px;
+  }
+
+  .form-actions {
+    flex-direction: column;
+  }
+
+  .form-actions .btn {
+    width: 100%;
+  }
+}

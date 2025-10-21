@@ -1,7 +1,9 @@
 import { Link } from "react-router-dom";
 import { formatCurrency, formatPercentage } from "../../utils/formatters";
+import Badge from "../common/Badge";
 import "../../styles/Card.css";
 import "../../styles/ProgressBar.css";
+import "../../styles/Badge.css";
 
 const ActiveBudgets = ({ budgets }) => {
   if (!budgets || budgets.length === 0) {
@@ -65,7 +67,7 @@ const ActiveBudgets = ({ budgets }) => {
                     {formatCurrency(budget.totalAmount)}
                   </p>
                 </div>
-                <span className="badge badge-success">ACTIVE</span>
+                <Badge variant="success">ACTIVE</Badge>
               </div>
 
               <div className="progress-bar">

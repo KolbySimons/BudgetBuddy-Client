@@ -4,13 +4,13 @@ const dashboardService = {
   // Get complete dashboard data
   getDashboard: async () => {
     const response = await api.get("/dashboard");
-    return response.data;
+    return response; // API interceptor already returns response.data
   },
 
   // Get dashboard statistics
   getStats: async () => {
     const response = await api.get("/dashboard/stats");
-    return response.data;
+    return response; // API interceptor already returns response.data
   },
 
   // Get spending by category
@@ -22,19 +22,19 @@ const dashboardService = {
     const response = await api.get("/dashboard/spending-by-category", {
       params,
     });
-    return response.data;
+    return response; // API interceptor already returns response.data
   },
 
   // Get monthly spending trend
   getMonthlyTrend: async (months = 6) => {
     const response = await api.get(`/dashboard/monthly-trend?months=${months}`);
-    return response.data;
+    return response; // API interceptor already returns response.data
   },
 
   // Get budget health
   getBudgetHealth: async () => {
     const response = await api.get("/dashboard/budget-health");
-    return response.data;
+    return response; // API interceptor already returns response.data
   },
 };
 
