@@ -1,5 +1,4 @@
 import { useState, useEffect } from "react";
-import Layout from "../components/layout/Layout";
 import { useAuth } from "../hooks/useAuth";
 import dashboardService from "../services/dashboardService";
 import StatsCard from "../components/dashboard/StatsCard";
@@ -14,14 +13,35 @@ const DashboardPage = () => {
   const [dashboardData, setDashboardData] = useState(null);
 
   useEffect(() => {
-    fetchDashboardData();
+    let isMounted = true;
+
+    const loadDashboard = async () => {
+      if (isMounted) {
+        await fetchDashboardData();
+      }
+    };
+
+    loadDashboard();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const fetchDashboardData = async () => {
     try {
       setLoading(true);
       const data = await dashboardService.getDashboard();
-      setDashboardData(data);
+
+      // Handle different response formats
+      let dashboardData = data;
+      if (data?.success && data?.data) {
+        dashboardData = data.data;
+      } else if (data?.data) {
+        dashboardData = data.data;
+      }
+
+      setDashboardData(dashboardData);
     } catch (error) {
       console.error("Error fetching dashboard:", error);
       toast.error("Failed to load dashboard data");
@@ -32,11 +52,9 @@ const DashboardPage = () => {
 
   if (loading) {
     return (
-      <Layout>
-        <div className="loading-container">
-          <div className="spinner"></div>
-        </div>
-      </Layout>
+      <div className="loading-container">
+        <div className="spinner"></div>
+      </div>
     );
   }
 
@@ -50,64 +68,62 @@ const DashboardPage = () => {
   const recentTransactions = dashboardData?.recentTransactions || [];
 
   return (
-    <Layout>
-      <div>
-        {/* Page Header */}
-        <div style={{ marginBottom: "2rem" }}>
-          <h1
-            style={{
-              fontSize: "2rem",
-              fontWeight: "bold",
-              color: "var(--gray-800)",
-              marginBottom: "0.5rem",
-            }}
-          >
-            Welcome back, {user?.displayName || user?.userName}! 👋
-          </h1>
-          <p style={{ color: "var(--gray-600)" }}>
-            Here's your financial overview
-          </p>
-        </div>
-
-        {/* Stats Grid */}
-        <div
+    <div>
+      {/* Page Header */}
+      <div style={{ marginBottom: "2rem" }}>
+        <h1
           style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
-            gap: "1.5rem",
-            marginBottom: "2rem",
+            fontSize: "2rem",
+            fontWeight: "bold",
+            color: "var(--gray-800)",
+            marginBottom: "0.5rem",
           }}
         >
-          <StatsCard
-            title="Total Budgeted"
-            amount={stats.totalBudgeted}
-            color="var(--primary)"
-          />
-          <StatsCard
-            title="Total Spent"
-            amount={stats.totalSpent}
-            color="var(--danger)"
-          />
-          <StatsCard
-            title="Remaining"
-            amount={stats.totalRemaining}
-            color="var(--success)"
-          />
-        </div>
-
-        {/* Active Budgets & Recent Transactions */}
-        <div
-          style={{
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "1.5rem",
-          }}
-        >
-          <ActiveBudgets budgets={activeBudgets} />
-          <RecentTransactions transactions={recentTransactions} />
-        </div>
+          Welcome back, {user?.displayName || user?.userName}! 👋
+        </h1>
+        <p style={{ color: "var(--gray-600)" }}>
+          Here's your financial overview
+        </p>
       </div>
-    </Layout>
+
+      {/* Stats Grid */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(250px, 1fr))",
+          gap: "1.5rem",
+          marginBottom: "2rem",
+        }}
+      >
+        <StatsCard
+          title="Total Budgeted"
+          amount={stats.totalBudgeted}
+          color="var(--primary)"
+        />
+        <StatsCard
+          title="Total Spent"
+          amount={stats.totalSpent}
+          color="var(--danger)"
+        />
+        <StatsCard
+          title="Remaining"
+          amount={stats.totalRemaining}
+          color="var(--success)"
+        />
+      </div>
+
+      {/* Active Budgets & Recent Transactions */}
+      <div
+        style={{
+          display: "grid",
+          gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+          gap: "1.5rem",
+        }}
+      >
+        <ActiveBudgets budgets={activeBudgets} />
+        <RecentTransactions transactions={recentTransactions} />
+      </div>
+    </div>
   );
 };
 

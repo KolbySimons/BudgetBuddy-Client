@@ -10,7 +10,19 @@ export const AuthProvider = ({ children }) => {
 
   // Check if user is logged in on mount
   useEffect(() => {
-    checkAuth();
+    let isMounted = true;
+
+    const initAuth = async () => {
+      if (isMounted) {
+        await checkAuth();
+      }
+    };
+
+    initAuth();
+
+    return () => {
+      isMounted = false;
+    };
   }, []);
 
   const checkAuth = async () => {

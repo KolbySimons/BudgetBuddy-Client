@@ -2,6 +2,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { AuthProvider } from "./context/AuthContext";
 import ProtectedRoute from "./components/auth/ProtectedRoute";
+import Layout from "./components/layout/Layout";
 
 // Auth Pages
 import LoginPage from "./pages/auth/LoginPage";
@@ -10,25 +11,22 @@ import RegisterPage from "./pages/auth/RegisterPage";
 // Dashboard Page
 import DashboardPage from "./pages/DashboardPage";
 
-// Placeholder pages (we'll create these later)
-const BudgetsPage = () => (
-  <div
-    style={{
-      minHeight: "100vh",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    }}
-  >
-    <h1
-      style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--primary)" }}
-    >
-      Budgets Page Coming Soon!
-    </h1>
-  </div>
-);
+// Budget Pages
+import BudgetsPage from "./pages/budgets/BudgetsPage";
+import CreateBudgetPage from "./pages/budgets/CreateBudgetPage";
+import BudgetDetailPage from "./pages/budgets/BudgetDetailsPage";
+import EditBudgetPage from "./pages/budgets/EditBudgetPage";
 
-const TransactionsPage = () => (
+// Category Pages
+import CategoriesPage from "./pages/categories/CategoriesPage";
+
+// Transaction Pages
+import TransactionsPage from "./pages/transactions/TransactionsPage";
+import AddTransactionPage from "./pages/transactions/AddTransactionPage";
+import EditTransactionPage from "./pages/transactions/EditTransactionPage";
+
+// Placeholder pages (we'll create these later)
+const OldTransactionsPage = () => (
   <div
     style={{
       minHeight: "100vh",
@@ -45,23 +43,6 @@ const TransactionsPage = () => (
   </div>
 );
 
-const CategoriesPage = () => (
-  <div
-    style={{
-      minHeight: "100vh",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-    }}
-  >
-    <h1
-      style={{ fontSize: "2rem", fontWeight: "bold", color: "var(--primary)" }}
-    >
-      Categories Page Coming Soon!
-    </h1>
-  </div>
-);
-
 function App() {
   return (
     <BrowserRouter>
@@ -72,12 +53,14 @@ function App() {
           <Route path="/login" element={<LoginPage />} />
           <Route path="/register" element={<RegisterPage />} />
 
-          {/* Protected Routes */}
+          {/* Protected Routes with Layout */}
           <Route
             path="/dashboard"
             element={
               <ProtectedRoute>
-                <DashboardPage />
+                <Layout>
+                  <DashboardPage />
+                </Layout>
               </ProtectedRoute>
             }
           />
@@ -85,7 +68,39 @@ function App() {
             path="/budgets"
             element={
               <ProtectedRoute>
-                <BudgetsPage />
+                <Layout>
+                  <BudgetsPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/budgets/create"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <CreateBudgetPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/budgets/:id/edit"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <EditBudgetPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/budgets/:id"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <BudgetDetailPage />
+                </Layout>
               </ProtectedRoute>
             }
           />
@@ -93,7 +108,29 @@ function App() {
             path="/transactions"
             element={
               <ProtectedRoute>
-                <TransactionsPage />
+                <Layout>
+                  <TransactionsPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/transactions/add"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <AddTransactionPage />
+                </Layout>
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/transactions/:id/edit"
+            element={
+              <ProtectedRoute>
+                <Layout>
+                  <EditTransactionPage />
+                </Layout>
               </ProtectedRoute>
             }
           />
@@ -101,7 +138,9 @@ function App() {
             path="/categories"
             element={
               <ProtectedRoute>
-                <CategoriesPage />
+                <Layout>
+                  <CategoriesPage />
+                </Layout>
               </ProtectedRoute>
             }
           />

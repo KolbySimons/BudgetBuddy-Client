@@ -8,13 +8,44 @@ const api = axios.create({
   },
 });
 
+// Request interceptor for debugging
+api.interceptors.request.use(
+  (config) => {
+    console.log("API Request:", {
+      method: config.method?.toUpperCase(),
+      url: config.url,
+      baseURL: config.baseURL,
+      fullUrl: `${config.baseURL}${config.url}`,
+      headers: config.headers,
+    });
+    return config;
+  },
+  (error) => {
+    console.error("API Request Error:", error);
+    return Promise.reject(error);
+  }
+);
+
 // Response interceptor for handling API responses
 api.interceptors.response.use(
   (response) => {
+    console.log("API Response Success:", {
+      status: response.status,
+      statusText: response.statusText,
+      url: response.config.url,
+      data: response.data,
+    });
     // Return the data from the standard API response format
     return response.data;
   },
   (error) => {
+    console.error("API Response Error:", {
+      message: error.message,
+      status: error.response?.status,
+      statusText: error.response?.statusText,
+      url: error.config?.url,
+      responseData: error.response?.data,
+    });
     // Handle errors
     if (error.response) {
       // Server responded with error
