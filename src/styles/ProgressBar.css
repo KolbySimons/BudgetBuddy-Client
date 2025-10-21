@@ -1,0 +1,41 @@
+/* Progress Bar Styles */
+
+.progress-bar {
+  height: 30px;
+  background-color: var(--gray-200);
+  border-radius: 15px;
+  position: relative;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--success) 0%, #48bb78 100%);
+  position: absolute;
+  left: 0;
+  top: 0;
+  transition: width 0.3s ease;
+  border-radius: 15px;
+}
+
+/* Progress bar variants */
+.progress-bar-sm {
+  height: 20px;
+  border-radius: 10px;
+}
+
+.progress-bar-lg {
+  height: 40px;
+  border-radius: 20px;
+}
+
+/* Budget item styles */
+.budget-item {
+  padding-bottom: 1.5rem;
+  border-bottom: 1px solid var(--gray-200);
+}
+
+.budget-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
