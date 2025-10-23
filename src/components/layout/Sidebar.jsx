@@ -39,8 +39,13 @@ const Sidebar = ({ isOpen, onClose }) => {
         <div className="sidebar">
           {/* Brand */}
           <div className="sidebar-brand">
-            <h2 className="sidebar-brand-title">💰 BudgetBuddy</h2>
-            <p className="sidebar-brand-subtitle">Financial Management</p>
+            <div className="sidebar-brand-logo">
+              <img
+                src="/logo.PNG"
+                alt="BudgetBuddy"
+                className="sidebar-logo-image"
+              />
+            </div>
           </div>
 
           {/* Navigation */}
