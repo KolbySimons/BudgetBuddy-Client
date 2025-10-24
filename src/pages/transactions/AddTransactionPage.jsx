@@ -126,7 +126,7 @@ const AddTransactionPage = () => {
             );
 
             // Give a longer delay to ensure backend processing is complete
-            await new Promise((resolve) => setTimeout(resolve, 2000));
+            await new Promise((resolve) => setTimeout(resolve, 500));
           } catch (recalcError) {
             console.error("⚠️ Failed to recalculate budget:", recalcError);
             // Don't show error to user since transaction was successful

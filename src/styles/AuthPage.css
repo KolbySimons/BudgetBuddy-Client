@@ -19,6 +19,30 @@
   margin-bottom: 2rem;
 }
 
+.login-brand {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.login-brand-logo {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 448px;
+}
+
+.login-logo-image {
+  height: auto;
+  width: auto;
+  max-width: 400px;
+}
+
 .auth-title {
   font-size: 2.5rem;
   font-weight: bold;
@@ -76,4 +100,15 @@
   .auth-card {
     padding: 1.5rem;
   }
+
+  .login-brand-logo {
+    padding: 1rem;
+    border-radius: 1rem;
+  }
+
+  .login-logo-image {
+    height: 60px;
+    max-width: 180px;
+  }
 }
+

@@ -66,10 +66,15 @@ const LoginPage = () => {
       <div className="auth-wrapper">
         {/* Header */}
         <div className="auth-header">
-          <h1 className="auth-title">💰 BudgetBuddy</h1>
-          <p className="auth-subtitle">
-            Plan your budget. Visualize your progress.
-          </p>
+          <div className="login-brand">
+            <div className="login-brand-logo">
+              <img
+                src="/logo.PNG"
+                alt="BudgetBuddy"
+                className="login-logo-image"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Login Card */}

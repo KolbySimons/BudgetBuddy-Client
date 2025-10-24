@@ -100,8 +100,15 @@ const RegisterPage = () => {
       <div className="auth-wrapper">
         {/* Header */}
         <div className="auth-header">
-          <h1 className="auth-title">💰 Create Your Account</h1>
-          <p className="auth-subtitle">Start managing your budget today</p>
+          <div className="login-brand">
+            <div className="login-brand-logo">
+              <img
+                src="/logo.PNG"
+                alt="BudgetBuddy"
+                className="login-logo-image"
+              />
+            </div>
+          </div>
         </div>
 
         {/* Register Card */}
